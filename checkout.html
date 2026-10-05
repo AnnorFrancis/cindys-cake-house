@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout · Cindy's Cake House</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#24130f">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/checkout.css">
+</head>
+<body data-page="checkout">
+<main id="main">
+  <section class="co-hero bg-cocoa grain">
+    <div class="wrap on-dark co-hero-in">
+      <div><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><a href="menu.html">Menu</a><span>/</span><span>Checkout</span></nav>
+      <h1 class="h2" id="coTitle">Checkout</h1></div>
+      <ol class="co-steps" id="coSteps"><li class="is-on">Bag</li><li>When & where</li><li>Your details</li><li>Payment</li></ol>
+    </div>
+  </section>
+
+  <section class="co bg-meringue" id="co">
+    <div class="wrap co-grid">
+      <form class="co-form" id="coForm" novalidate>
+        <!-- 1 bag -->
+        <fieldset class="co-sec" data-s="0">
+          <legend><span class="mono">01</span> Your bag</legend>
+          <div id="coLines"></div>
+          <a class="link-u" href="menu.html" style="margin-top:14px">Add something from the counter →</a>
+        </fieldset>
+
+        <!-- 2 when & where -->
+        <fieldset class="co-sec" data-s="1">
+          <legend><span class="mono">02</span> When & where</legend>
+          <div class="choice-grid">
+            <label class="choice"><input type="radio" name="method" value="delivery" checked><span class="dot"></span><span><b>Delivery</b><small>Our van, a two-hour window you choose</small></span></label>
+            <label class="choice"><input type="radio" name="method" value="collection"><span class="dot"></span><span><b>Collect at the house</b><small>12 Nii Sai Road, Cantonments · free</small></span></label>
+          </div>
+          <div id="delFields" class="form-grid" style="margin-top:16px">
+            <label class="field"><span>Area</span><select class="select" id="zone" required></select></label>
+            <label class="field"><span>Digital address (GhanaPost GPS)</span><input class="input" id="gps" placeholder="GA-183-8164" autocomplete="off"></label>
+            <label class="field span-2"><span>Street, house or venue</span><input class="input" id="addr" required placeholder="House 9, Lagos Avenue, East Legon · or the venue name" autocomplete="street-address"></label>
+            <label class="field span-2"><span>Directions for the driver <em class="opt">(optional)</em></span><input class="input" id="landmark" placeholder="Black gate opposite the pharmacy"></label>
+          </div>
+          <div class="form-grid" style="margin-top:16px">
+            <label class="field"><span id="dateLbl">Delivery date</span><input class="input" type="date" id="date" required></label>
+            <div class="field"><span>Capacity</span><p class="cap-msg" id="capMsg">Choose a date</p></div>
+          </div>
+          <div class="field" style="margin-top:16px"><span id="slotLbl">Delivery window</span><div class="opt-row slots" id="slots"></div></div>
+          <p class="err" id="whenErr" hidden></p>
+        </fieldset>
+
+        <!-- 3 details -->
+        <fieldset class="co-sec" data-s="2">
+          <legend><span class="mono">03</span> Your details</legend>
+          <div class="form-grid">
+            <label class="field"><span>Full name</span><input class="input" id="name" required autocomplete="name" placeholder="Abena Owusu"></label>
+            <label class="field"><span>WhatsApp number</span><input class="input" id="phone" type="tel" required autocomplete="tel" placeholder="024 123 4567"></label>
+            <label class="field span-2"><span>Email <em class="opt">(for your receipt)</em></span><input class="input" id="email" type="email" autocomplete="email" placeholder="abena@example.com"></label>
+          </div>
+          <label class="toggle"><input type="checkbox" id="isGift"><span class="tg"></span><span><b>This is a gift</b><small>We'll deliver to someone else and won't call them first</small></span></label>
+          <div class="form-grid" id="giftFields" hidden>
+            <label class="field"><span>Recipient's name</span><input class="input" id="rName" placeholder="Nana Ama Mensah"></label>
+            <label class="field"><span>Recipient's phone</span><input class="input" id="rPhone" type="tel" placeholder="055 987 6543"></label>
+            <label class="field span-2"><span>Card message</span><textarea class="textarea" id="card" maxlength="180" placeholder="Afehyia pa, my love. Dinner at eight."></textarea></label>
+          </div>
+          <label class="toggle"><input type="checkbox" id="remind" checked><span class="tg"></span><span><b>Remind me next year</b><small>One WhatsApp note three weeks before, with this year's cake. That's all.</small></span></label>
+          <div class="form-grid" id="remindFields">
+            <label class="field"><span>Occasion</span><select class="select" id="occType"><option value="birthday">Birthday</option><option value="anniversary">Anniversary</option><option value="naming">Naming day</option><option value="business">Business anniversary</option></select></label>
+            <label class="field"><span>Whose?</span><input class="input" id="occWho" placeholder="My daughter, Ama"></label>
+          </div>
+          <label class="field" style="margin-top:16px"><span>Notes for the kitchen <em class="opt">(optional)</em></span><textarea class="textarea" id="notes" placeholder="Nut-free please · Gate code 2241"></textarea></label>
+        </fieldset>
+
+        <!-- 4 payment -->
+        <fieldset class="co-sec" data-s="3">
+          <legend><span class="mono">04</span> Payment</legend>
+          <div class="pay-amt" id="payAmt"></div>
+          <div class="choice-grid three" id="payGrid">
+            <label class="choice"><input type="radio" name="pay" value="momo" checked><span class="dot"></span><span><b>Mobile Money</b><small>MTN, Telecel, AT. A prompt comes to your phone</small></span></label>
+            <label class="choice"><input type="radio" name="pay" value="card"><span class="dot"></span><span><b>Card</b><small>Visa or Mastercard on our payment partner's page</small></span></label>
+            <label class="choice" id="arrivalChoice"><input type="radio" name="pay" value="arrival"><span class="dot"></span><span><b>Pay on collection</b><small>Counter orders only, cash or MoMo</small></span></label>
+          </div>
+          <div class="form-grid" id="momoFields" style="margin-top:16px">
+            <label class="field"><span>Network</span><select class="select" id="network"><option>MTN MoMo</option><option>Telecel Cash</option><option>AT Money</option></select></label>
+            <label class="field"><span>Mobile Money number</span><input class="input" id="momo" type="tel" placeholder="Same as WhatsApp"></label>
+          </div>
+          <p class="demo-note">Demo: no money moves. Payments are simulated and card details are never collected on this site.</p>
+          <label class="toggle"><input type="checkbox" id="terms"><span class="tg"></span><span><b>I agree to the <a href="policies.html#orders" target="_blank"><u>order & deposit terms</u></a></b><small>Balance due 72 hours before delivery. Cancellations up to 7 days before are refunded in full.</small></span></label>
+          <p class="err" id="formErr" hidden></p>
+          <button class="btn btn-block co-pay" type="submit" id="payBtn">Pay</button>
+        </fieldset>
+      </form>
+
+      <aside class="co-sum glass-light" id="coSum" aria-label="Order summary"></aside>
+    </div>
+  </section>
+
+  <section class="done bg-cocoa grain" id="done" hidden></section>
+
+  <div class="paying" id="paying" hidden><div class="paying-card glass"><div class="spin"></div><b class="h4" id="payingT">Sending a prompt to your phone…</b><p id="payingS">Approve the payment with your Mobile Money PIN.</p></div></div>
+  <div data-footer></div>
+</main>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/concierge.js"></script>
+<script src="assets/js/checkout.js"></script>
+</body>
+</html>

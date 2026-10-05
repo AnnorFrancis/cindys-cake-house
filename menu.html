@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Menu · Cindy's Cake House, Cantonments</title>
+  <meta name="description" content="Couture cakes from GHS 280, wedding tiers from GHS 6,800, daily pâtisserie, macarons, dessert tables and corporate gifts. Order online for delivery across Accra.">
+  <meta name="theme-color" content="#24130f">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body data-page="menu">
+<main id="main">
+  <section class="phero">
+    <div class="phero-bg"><img src="assets/img/full/int-display.jpg" alt="" fetchpriority="high"></div>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>The Menu</span></nav>
+      <div class="phero-row">
+        <div>
+          <h1 class="h1" data-split>Everything we|bake, priced</h1>
+          <p class="lede" data-reveal>Counter pâtisserie every morning, couture cakes in 48 hours, wedding tiers by commission. Tap any piece to choose a size, a sponge and a message.</p>
+        </div>
+        <div class="phero-card glass" data-reveal>
+          <p class="mono" style="margin:0 0 6px">TODAY AT THE HOUSE</p>
+          <p style="margin:0;font-size:14.5px" id="todayLine">Counter open until 19:00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filters" id="filters">
+    <div class="wrap filters-in">
+      <div class="f-cats" id="fCats" role="tablist" aria-label="Categories"></div>
+      <div class="f-tools">
+        <label class="sr-only" for="fOcc">Occasion</label>
+        <select class="select f-sel" id="fOcc"></select>
+        <label class="sr-only" for="fSort">Sort</label>
+        <select class="select f-sel" id="fSort"><option value="feat">Featured</option><option value="lo">Price, low to high</option><option value="hi">Price, high to low</option><option value="az">A to Z</option></select>
+        <div class="f-search"><label class="sr-only" for="fQ">Search the menu</label><input class="input" id="fQ" type="search" placeholder="Search: pistachio, heart, 3 tiers…"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="menuOut"></div>
+
+  <section class="section-sm bg-sobolo grain menu-cta">
+    <div class="wrap menu-cta-in on-dark">
+      <div><p class="eyebrow">Not quite it?</p><h2 class="h2" style="margin-top:12px">Design your own in the Atelier</h2></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-pist" href="atelier.html">Open the Atelier</a><button class="btn btn-ghost on-dark" onclick="CCHConcierge.open()">Ask Ama</button></div>
+    </div>
+  </section>
+  <div data-footer></div>
+</main>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/concierge.js"></script>
+<script src="assets/js/menu.js"></script>
+</body>
+</html>

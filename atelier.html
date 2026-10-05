@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cake Atelier · Design your cake · Cindy's Cake House</title>
+  <meta name="description" content="Design a custom cake online: tiers, sponge, finish and decoration, with a live price and real kitchen availability. Pay a 50% Mobile Money deposit to hold your date.">
+  <meta name="theme-color" content="#24130f">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/atelier.css">
+</head>
+<body data-page="atelier">
+<main id="main">
+  <section class="at-hero bg-sobolo grain">
+    <div class="wrap at-hero-in on-dark">
+      <div>
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Cake Atelier</span></nav>
+        <h1 class="h1" data-split>Design it here.|We'll bake it there.</h1>
+      </div>
+      <p class="lede" data-reveal>Seven decisions, a live price, and only the dates our kitchen can genuinely make. Esi reviews every design and confirms on WhatsApp within the hour.</p>
+    </div>
+  </section>
+
+  <section class="at-app bg-meringue" id="app">
+    <div class="wrap-wide at-grid2">
+      <!-- live stage -->
+      <aside class="at-stage-col">
+        <div class="at-stage" id="stage">
+          <div class="st-top"><span class="mono" id="stServes">Serves 90</span><span class="mono" id="stLead">5 days' notice</span></div>
+          <div class="st-cake-wrap"><div class="cake" id="cake" aria-hidden="true"></div></div>
+          <div class="st-ref" id="stRef"></div>
+          <div class="st-price glass">
+            <div><span class="label">Your cake</span><b class="mono" id="stPrice">GHS 0</b><small id="stDeposit">Deposit today GHS 0</small></div>
+            <button class="btn btn-pist" id="stAdd">Add to bag</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- steps -->
+      <div class="at-steps" id="steps">
+        <section class="step" data-step="1">
+          <header><span class="mono">01</span><h2 class="h3">What are we celebrating?</h2></header>
+          <div class="opt-row" data-key="occasion"></div>
+        </section>
+        <section class="step" data-step="2">
+          <header><span class="mono">02</span><h2 class="h3">Size & shape</h2></header>
+          <div class="guests">
+            <label class="label" for="guests">Guests <output class="mono" id="guestsOut">90</output></label>
+            <input type="range" id="guests" min="4" max="260" step="2" value="90">
+            <p class="muted small" id="guestsHint"></p>
+          </div>
+          <div class="sub"><span class="label">Tiers</span><div class="opt-row" data-key="tiers"></div></div>
+          <div class="sub"><span class="label">Shape</span><div class="opt-row" data-key="shape"></div></div>
+          <div class="sub"><span class="label">Height</span><div class="opt-row" data-key="height"></div></div>
+        </section>
+        <section class="step" data-step="3">
+          <header><span class="mono">03</span><h2 class="h3">Sponge & filling</h2></header>
+          <div id="flavours" class="flv"></div>
+        </section>
+        <section class="step" data-step="4">
+          <header><span class="mono">04</span><h2 class="h3">Finish & colour</h2></header>
+          <div class="sub"><span class="label">Finish</span><div class="opt-row" data-key="finish"></div></div>
+          <div class="sub"><span class="label">Colour</span><div class="swatches" data-key="colour"></div></div>
+        </section>
+        <section class="step" data-step="5">
+          <header><span class="mono">05</span><h2 class="h3">Decoration</h2><span class="muted small">Choose any</span></header>
+          <div class="decor" data-key="decor"></div>
+          <div class="field" id="plaqueField" hidden><span>Monogram or message (max 24 characters)</span><input class="input" id="plaque" maxlength="24" placeholder="A & K · 14.11.26"></div>
+        </section>
+        <section class="step" data-step="6">
+          <header><span class="mono">06</span><h2 class="h3">Your inspiration</h2><span class="muted small">Optional</span></header>
+          <label class="drop" id="drop"><input type="file" id="files" accept="image/*" multiple><span><b>Add photos</b> you've saved: a dress, a cake, a colour, a venue.</span><small class="muted">They travel with your order to Esi and Nana Ama. Nothing is published.</small></label>
+          <div class="thumbs" id="thumbs"></div>
+          <label class="field" style="margin-top:14px"><span>Anything else we should know?</span><textarea class="textarea" id="notes" placeholder="Our colours are emerald and gold. One tier eggless, please."></textarea></label>
+        </section>
+        <section class="step" data-step="7">
+          <header><span class="mono">07</span><h2 class="h3">Choose a date</h2></header>
+          <p class="muted small" id="calNote"></p>
+          <div class="cal" id="cal"></div>
+          <div class="cal-key"><span><i class="k-open"></i>Open</span><span><i class="k-lim"></i>Filling up</span><span><i class="k-full"></i>Fully booked</span><span><i class="k-closed"></i>Closed</span></div>
+        </section>
+        <section class="step step-sum" data-step="8">
+          <header><span class="mono">08</span><h2 class="h3">Your commission</h2></header>
+          <div id="summary"></div>
+          <div class="sum-actions"><button class="btn" id="sumAdd">Add to bag & choose delivery</button><button class="btn btn-ghost" id="sumAsk">Ask Ama about this design</button></div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <div class="at-bar glass" id="atBar"><div><b class="mono" id="barPrice">GHS 0</b><small id="barSub">3 tiers · serves 90</small></div><button class="btn btn-pist btn-sm" id="barAdd">Add to bag</button></div>
+  <div data-footer></div>
+</main>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/concierge.js"></script>
+<script src="assets/js/atelier.js"></script>
+</body>
+</html>

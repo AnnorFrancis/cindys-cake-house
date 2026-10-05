@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio · Cindy's Cake House</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#24130f">
+  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body data-page="admin" class="adm">
+  <!-- demo sign-in -->
+  <section class="gate" id="gate">
+    <div class="gate-card">
+      <svg class="gate-logo" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M24.66 2.61A18 18 0 1 0 36.31 12.39" stroke="currentColor" stroke-width="1.4"/><path d="M21.41 18.31 37.72 10.7A18 18 0 0 0 26.07.92Z" fill="#b3c697"/><text x="19" y="27.2" text-anchor="middle" font-family="Gilda Display, Georgia, serif" font-size="19" fill="currentColor">C</text></svg>
+      <p class="eyebrow on-dark">Cindy's Studio</p>
+      <h1 class="h2">Everything the house<br>is doing, in one place.</h1>
+      <p class="muted">Orders from the website, WhatsApp, Instagram and the counter; the kitchen board; customers and their occasions; and an assistant that reads it all.</p>
+      <button class="btn btn-pist" id="enter">Enter as Cindy <svg class="arr" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 5h16M12 1l4 4-4 4"/></svg></button>
+      <p class="gate-note">Demo access. In the live system each team member signs in with their own account and role.</p>
+    </div>
+  </section>
+
+  <div class="shell" id="shell" hidden>
+    <aside class="side">
+      <a class="side-brand" href="../index.html" title="View the website"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M24.66 2.61A18 18 0 1 0 36.31 12.39" stroke="currentColor" stroke-width="1.4"/><path d="M21.41 18.31 37.72 10.7A18 18 0 0 0 26.07.92Z" fill="#b3c697"/><text x="19" y="27.2" text-anchor="middle" font-family="Gilda Display, Georgia, serif" font-size="19" fill="currentColor">C</text></svg><span><b>Cindy's</b><small>Studio</small></span></a>
+      <nav class="side-nav" id="sideNav" aria-label="Dashboard"></nav>
+      <div class="side-foot"><a href="../index.html" target="_blank" rel="noopener">Open website ↗</a><button id="resetDemo" type="button">Reset demo data</button></div>
+    </aside>
+    <div class="main">
+      <header class="top">
+        <button class="icon-btn top-menu" id="topMenu" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <div><h1 class="top-title" id="viewTitle">Today</h1><p class="top-sub" id="viewSub"></p></div>
+        <div class="top-right"><span class="live"><i></i>Live</span><span class="who"><img src="../assets/img/thumb/team-cindy.jpg" alt="">Cindy</span></div>
+      </header>
+      <div class="view" id="view"></div>
+    </div>
+  </div>
+
+  <aside class="drawer adm-drawer" id="aDrawer" aria-hidden="true">
+    <div class="drawer-head"><h2 id="aDrawerT">Order</h2><button class="close-x" data-aclose aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <div class="drawer-body" id="aDrawerB"></div>
+  </aside>
+  <div class="scrim" id="aScrim"></div>
+  <div class="toasts" id="aToasts" aria-live="polite"></div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/store.js"></script>
+  <script src="../assets/js/admin.js"></script>
+</body>
+</html>
