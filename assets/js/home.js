@@ -82,8 +82,7 @@
       .from("#domeSlides img", { scale: 1.3, duration: 2, ease: "expo.out" }, "-=1")
       .from(".hero-eyebrow, .hero-lede, .hero-ctas, .hero-dots", { opacity: 0, y: 20, stagger: 0.08, duration: 0.9, ease: "power3.out" }, "-=1.5")
       .from("#domeCard", { opacity: 0, y: 24, duration: 0.8, ease: "power3.out" }, "-=0.9")
-      .from("#heroChip", { scale: 0, duration: 0.9, ease: "back.out(1.6)" }, "-=0.8")
-      .from(".hero-side", { opacity: 0, duration: 1 }, "-=0.8");
+      .from("#heroChip", { scale: 0, duration: 0.9, ease: "back.out(1.6)" }, "-=0.8");
     // parallax on the dome
     gsap.to("#domeSlides", { yPercent: 8, ease: "none", scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true } });
   }

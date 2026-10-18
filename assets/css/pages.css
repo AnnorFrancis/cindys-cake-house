@@ -25,7 +25,7 @@
 .hero-dots em { font-style: normal; font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .hero-dots i { display: block; height: 2px; margin-top: 8px; background: var(--line-dark); border-radius: 2px; overflow: hidden; }
 .hero-dots b { display: block; height: 100%; background: var(--pistachio); transform-origin: left; transform: scaleX(0); }
-.hero-stage { position: relative; height: clamp(480px, calc(100svh - 230px), 760px); display: grid; place-items: center; }
+.hero-stage { position: relative; height: clamp(400px, calc(100svh - 250px), 760px); display: grid; place-items: center; }
 .dome { position: relative; width: min(100%, 500px); height: 100%; border-radius: 999px 999px var(--r-lg) var(--r-lg); overflow: hidden; background: var(--cocoa-3); box-shadow: 0 50px 100px -40px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(247, 237, 239, 0.12); isolation: isolate; }
 .dome::after { content: ""; position: absolute; inset: 50% 0 0; background: linear-gradient(transparent, rgba(36, 19, 15, 0.7)); z-index: 3; pointer-events: none; }
 .dome-slides { position: absolute; inset: -4% 0; }
@@ -43,9 +43,8 @@
 .dc-add { flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--pistachio); color: var(--cocoa); display: grid; place-items: center; transition: transform 0.5s var(--ease); }
 .dc-add:hover { transform: rotate(90deg); }
 .dc-add svg { width: 16px; height: 16px; }
-.hero-chip { position: absolute; left: max(0px, calc(50% - 330px)); bottom: 16%; z-index: 5; width: 148px; height: 148px; border-radius: 50%; overflow: hidden; border: 6px solid var(--cocoa); box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.6); }
+.hero-chip { position: absolute; left: max(0px, calc(50% - 330px)); bottom: 150px; z-index: 5; width: 148px; height: 148px; border-radius: 50%; overflow: hidden; border: 6px solid var(--cocoa); box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.6); }
 .hero-chip img { width: 100%; height: 100%; object-fit: cover; }
-.hero-side { position: absolute; right: 0; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; font-size: 11px; letter-spacing: 0.3em; color: var(--on-dark-3); }
 
 /* ticker */
 .ticker { overflow: hidden; padding: 15px 0; border-top: 1px solid rgba(247, 237, 239, 0.08); }
@@ -165,8 +164,7 @@
   .hero-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: 26px; }
   .hero-stage { order: -1; height: 62svh; min-height: 440px; }
   .dome { width: min(100%, 440px); }
-  .hero-side { display: none; }
-  .hero-chip { width: 96px; height: 96px; border-width: 4px; left: max(0px, calc(50% - 250px)); bottom: 22%; }
+  .hero-chip { width: 96px; height: 96px; border-width: 4px; left: max(0px, calc(50% - 250px)); bottom: 128px; }
   .hero-title { font-size: clamp(2.8rem, 12vw, 5rem); min-height: 0; }
   .hero-dots { margin-top: 30px; }
   .hero-dots em { display: none; }
