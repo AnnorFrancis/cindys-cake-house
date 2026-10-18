@@ -133,9 +133,14 @@
     const xTo = gsap.quickTo(fl, "x", { duration: 0.6, ease: "power3" }), yTo = gsap.quickTo(fl, "y", { duration: 0.6, ease: "power3" });
     const sec = $("#collections");
     sec.addEventListener("mousemove", e => { xTo(e.clientX); yTo(e.clientY); });
+    // the floating picture only lives while a row is hovered: scrolling or leaving the section hides it
+    let scrolling = 0;
+    const hide = () => gsap.to(fl, { opacity: 0, scale: 0.85, rotate: 0, duration: 0.35, overwrite: true });
+    window.addEventListener("scroll", () => { scrolling = performance.now(); hide(); }, { passive: true });
+    sec.addEventListener("mouseleave", hide);
     $$(".coll-row").forEach(r => {
-      r.addEventListener("mouseenter", () => { fimg.src = r.dataset.img; gsap.to(fl, { opacity: 1, scale: 1, rotate: -4, duration: 0.5, ease: "power3.out" }); });
-      r.addEventListener("mouseleave", () => gsap.to(fl, { opacity: 0, scale: 0.85, rotate: 0, duration: 0.4 }));
+      r.addEventListener("mouseenter", () => { if (performance.now() - scrolling < 250) return; fimg.src = r.dataset.img; gsap.to(fl, { opacity: 1, scale: 1, rotate: -4, duration: 0.5, ease: "power3.out", overwrite: true }); });
+      r.addEventListener("mouseleave", hide);
     });
   })();
 

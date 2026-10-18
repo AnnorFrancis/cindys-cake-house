@@ -243,7 +243,7 @@ window.CCHUI = (function () {
   /* ---------- smooth scroll + reveals ---------- */
   let lenis = null;
   function initScroll() {
-    if (MOTION && window.Lenis) {
+    if (MOTION && window.Lenis && !window.__noLenis) {
       lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1, smoothWheel: true });
       if (window.gsap && window.ScrollTrigger) { lenis.on("scroll", ScrollTrigger.update); gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
       else { const raf = t => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
