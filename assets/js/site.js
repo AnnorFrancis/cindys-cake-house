@@ -250,10 +250,6 @@ window.CCHUI = (function () {
       $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => { const id = a.getAttribute("href"); if (id.length > 1 && $(id)) { e.preventDefault(); lenis.scrollTo(id, { offset: -90 }); } }));
     }
     if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
-    // nav hide on scroll down
-    let lastY = 0; const nav = $("#nav");
-    const onScroll = () => { const y = window.scrollY; if (nav && !document.body.classList.contains("is-locked")) nav.classList.toggle("is-hidden", y > 240 && y > lastY + 4); if (Math.abs(y - lastY) > 4) lastY = y; };
-    window.addEventListener("scroll", onScroll, { passive: true });
     reveals();
   }
   function reveals(scope) {

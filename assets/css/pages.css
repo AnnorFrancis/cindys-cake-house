@@ -55,12 +55,6 @@
 .ticker:hover .ticker-track { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
-/* manifesto */
-.mani-text { font-family: var(--f-display); font-size: clamp(2rem, 4.6vw, 4.4rem); line-height: 1.1; letter-spacing: -0.02em; margin: 28px 0 0; max-width: 24ch; }
-.mani-text .ichip { width: 1.7em; height: 0.86em; }
-.mani-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: clamp(56px, 7vw, 96px); padding-top: 28px; border-top: 1px solid var(--line); }
-.mani-facts b { display: block; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 500; color: var(--sobolo); line-height: 1; margin-bottom: 10px; letter-spacing: -0.03em; }
-.mani-facts span { font-size: 14px; color: var(--ink-2); display: block; max-width: 22ch; }
 
 /* collections */
 .coll-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-dark); }
@@ -72,8 +66,9 @@
 .coll-arr { font-size: 22px; transition: transform 0.5s var(--ease), color 0.4s; justify-self: end; }
 .coll-row:hover .coll-name { transform: translateX(14px); color: var(--pistachio); }
 .coll-row:hover .coll-arr { transform: translateX(6px) rotate(-30deg); color: var(--pistachio); }
-.coll-float { position: fixed; left: 0; top: 0; z-index: 4; width: 270px; height: 350px; margin: -175px 0 0 -135px; pointer-events: none; opacity: 0; transform: scale(0.85); border-radius: 999px 999px 18px 18px; overflow: hidden; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); }
-.coll-float img { width: 100%; height: 100%; object-fit: cover; }
+.coll-float { position: fixed; left: 0; top: 0; z-index: 4; width: 270px; height: 350px; margin: -175px 0 0 48px; pointer-events: none; opacity: 0; transform: scale(0.85); border-radius: 999px 999px 18px 18px; overflow: hidden; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); }
+.coll-float img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.35s var(--ease); }
+.coll-float img.on { opacity: 1; }
 
 /* signatures */
 .sig { position: relative; overflow: hidden; }
@@ -190,7 +185,6 @@
   .wf-grid { grid-template-columns: minmax(0, 1fr); }
   .wf-stack { height: 440px; }
   .dl-grid { grid-template-columns: minmax(0, 1fr); }
-  .mani-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 760px) {
   .hero-stage { height: 56svh; min-height: 400px; }

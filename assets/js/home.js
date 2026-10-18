@@ -107,41 +107,33 @@
     $("#ticker").innerHTML = row + row;
   })();
 
-  /* ---------------- manifesto word reveal ---------------- */
-  (function () {
-    const el = $("#mani");
-    // wrap words (text nodes only) so they can light up on scroll
-    const walk = node => { [...node.childNodes].forEach(n => { if (n.nodeType === 3) { const f = document.createDocumentFragment(); n.textContent.split(/(\s+)/).forEach(w => { if (!w) return; if (/^\s+$/.test(w)) f.appendChild(document.createTextNode(w)); else { const s = document.createElement("span"); s.className = "mw"; s.textContent = w; f.appendChild(s); } }); n.replaceWith(f); } }); };
-    walk(el);
-    if (M) gsap.fromTo($$(".mw, .ichip", el), { opacity: 0.16 }, { opacity: 1, stagger: 0.05, ease: "none", scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: true } });
-  })();
-
   /* ---------------- collections ---------------- */
   (function () {
     const counts = {}; D.PRODUCTS.forEach(p => counts[p.cat] = (counts[p.cat] || 0) + 1);
     const cover = { couture: "cel-pearl-sculpture", wedding: "wed-monogram", patisserie: "pat-pistachio-millefeuille", viennoiserie: "pat-croissant", confection: "conf-macaron-12", events: "evt-orchid-table", gifting: "gift-pistachio-ribbon" };
     const minP = c => Math.min(...D.PRODUCTS.filter(p => p.cat === c).map(p => p.price));
-    $("#collList").innerHTML = D.CATEGORIES.map(c => `<li data-reveal><a class="coll-row" href="menu.html#${c.id}" data-img="${img(cover[c.id], "full")}">
+    $("#collList").innerHTML = D.CATEGORIES.map(c => `<li data-reveal><a class="coll-row" href="menu.html#${c.id}" data-cat="${c.id}">
       <img class="coll-thumb" src="${img(cover[c.id])}" alt="" loading="lazy">
       <span class="coll-name">${esc(c.name)}</span>
       <span class="coll-line">${esc(c.line)}</span>
       <span class="coll-meta mono">${counts[c.id]} · from ${S.money(minP(c.id))}</span>
       <span class="coll-arr" aria-hidden="true">→</span></a></li>`).join("");
     U.reveals($("#collList"));
-    const fl = $("#collFloat"), fimg = fl.querySelector("img");
+    const fl = $("#collFloat");
     if (!M || !matchMedia("(hover: hover) and (min-width: 1021px)").matches) return;
+    // every picture is in the frame from the start (no loading on hover); the active one crossfades in
+    fl.innerHTML = D.CATEGORIES.map(c => `<img src="${img(cover[c.id])}" alt="" data-cat="${c.id}">`).join("");
     const xTo = gsap.quickTo(fl, "x", { duration: 0.6, ease: "power3" }), yTo = gsap.quickTo(fl, "y", { duration: 0.6, ease: "power3" });
     const sec = $("#collections");
-    sec.addEventListener("mousemove", e => { xTo(e.clientX); yTo(e.clientY); });
-    // the floating picture only lives while a row is hovered: scrolling or leaving the section hides it
-    let scrolling = 0;
-    const hide = () => gsap.to(fl, { opacity: 0, scale: 0.85, rotate: 0, duration: 0.35, overwrite: true });
-    window.addEventListener("scroll", () => { scrolling = performance.now(); hide(); }, { passive: true });
-    sec.addEventListener("mouseleave", hide);
-    $$(".coll-row").forEach(r => {
-      r.addEventListener("mouseenter", () => { if (performance.now() - scrolling < 250) return; fimg.src = r.dataset.img; gsap.to(fl, { opacity: 1, scale: 1, rotate: -4, duration: 0.5, ease: "power3.out", overwrite: true }); });
-      r.addEventListener("mouseleave", hide);
-    });
+    let shown = false, cur = null, px = -1, py = -1, raf = 0;
+    const setCat = id => { if (id === cur) return; cur = id; $$("img", fl).forEach(i => i.classList.toggle("on", i.dataset.cat === id)); };
+    const show = () => { if (shown) return; shown = true; gsap.to(fl, { opacity: 1, scale: 1, rotate: -4, duration: 0.45, ease: "power3.out", overwrite: "auto" }); };
+    const hide = () => { if (!shown) return; shown = false; gsap.to(fl, { opacity: 0, scale: 0.85, rotate: 0, duration: 0.3, ease: "power2.out", overwrite: "auto" }); };
+    // one source of truth: whatever row is under the pointer right now (also after the page scrolls under it)
+    const update = () => { const el = px < 0 ? null : document.elementFromPoint(px, py); const row = el && el.closest(".coll-row"); if (row) { setCat(row.dataset.cat); show(); } else hide(); };
+    sec.addEventListener("mousemove", e => { px = e.clientX; py = e.clientY; xTo(px); yTo(py); update(); });
+    sec.addEventListener("mouseleave", () => { px = -1; hide(); });
+    window.addEventListener("scroll", () => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; update(); }); }, { passive: true });
   })();
 
   /* ---------------- signatures (horizontal) ---------------- */

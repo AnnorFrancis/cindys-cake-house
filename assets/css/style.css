@@ -176,9 +176,7 @@ p { margin: 0 0 1em; }
   background: rgba(36, 19, 15, 0.58); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5);
   border: 1px solid rgba(247, 237, 239, 0.14); color: var(--on-dark);
   box-shadow: 0 10px 40px -18px rgba(20, 8, 6, 0.6);
-  transition: transform 0.6s var(--ease), background 0.4s;
 }
-.nav.is-hidden { transform: translate(-50%, -120%); }
 .brand { display: inline-flex; align-items: center; gap: 10px; flex: none; }
 .brand svg { width: 34px; height: 34px; }
 .brand-word { display: grid; line-height: 1; }
