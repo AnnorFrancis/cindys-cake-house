@@ -287,9 +287,10 @@ window.CCHUI = (function () {
     if (!flag || !MOTION || !window.gsap) return false;
     c.classList.add("is-cover");
     gsap.set(c, { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" }); gsap.set($(".cmark", c), { opacity: 1 });
-    gsap.timeline({ delay: 0.08, onComplete: () => c.classList.remove("is-cover") })
+    // the cut lifts fully off the top edge, then the curtain resets to its hidden state
+    gsap.timeline({ delay: 0.08, onComplete: () => { c.classList.remove("is-cover"); gsap.set(c, { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" }); } })
       .to($(".cmark", c), { opacity: 0, duration: 0.25 })
-      .to(c, { clipPath: "polygon(0% 0%, 100% 0%, 100% -12%, 0% 18%)", duration: 0.85, ease: "power3.inOut" }, "-=0.05");
+      .to(c, { clipPath: "polygon(0% 0%, 100% 0%, 100% -40%, 0% -10%)", duration: 0.85, ease: "power3.inOut" }, "-=0.05");
     return true;
   }
   document.addEventListener("click", e => {
