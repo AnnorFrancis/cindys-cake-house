@@ -1,4 +1,4 @@
-/* Home page: dome slideshow, ticker, collections hover, horizontal signatures,
+/* Home page: dome slideshow, ticker, collections showcase, horizontal signatures,
    atelier teaser, reviews, delivery checker, gallery strip. */
 (function () {
   const D = CCH, S = CCHStore, U = CCHUI, { $, $$, esc, img } = U;
@@ -106,33 +106,90 @@
     $("#ticker").innerHTML = row + row;
   })();
 
-  /* ---------------- collections ---------------- */
+  /* ---------------- collections: index, arched showcase, most ordered ---------------- */
   (function () {
-    const counts = {}; D.PRODUCTS.forEach(p => counts[p.cat] = (counts[p.cat] || 0) + 1);
-    const cover = { couture: "cel-pearl-sculpture", wedding: "wed-monogram", patisserie: "pat-pistachio-millefeuille", viennoiserie: "pat-croissant", confection: "conf-macaron-12", events: "evt-orchid-table", gifting: "gift-pistachio-ribbon" };
-    const minP = c => Math.min(...D.PRODUCTS.filter(p => p.cat === c).map(p => p.price));
-    $("#collList").innerHTML = D.CATEGORIES.map(c => `<li data-reveal><a class="coll-row" href="menu.html#${c.id}" data-cat="${c.id}">
-      <img class="coll-thumb" src="${img(cover[c.id])}" alt="" loading="lazy">
-      <span class="coll-name">${esc(c.name)}</span>
-      <span class="coll-line">${esc(c.line)}</span>
-      <span class="coll-meta mono">${counts[c.id]} · from ${S.money(minP(c.id))}</span>
-      <span class="coll-arr" aria-hidden="true">→</span></a></li>`).join("");
-    U.reveals($("#collList"));
-    const fl = $("#collFloat");
-    if (!M || !matchMedia("(hover: hover) and (min-width: 1021px)").matches) return;
-    // every picture is in the frame from the start (no loading on hover); the active one crossfades in
-    fl.innerHTML = D.CATEGORIES.map(c => `<img src="${img(cover[c.id])}" alt="" data-cat="${c.id}">`).join("");
-    const xTo = gsap.quickTo(fl, "x", { duration: 0.6, ease: "power3" }), yTo = gsap.quickTo(fl, "y", { duration: 0.6, ease: "power3" });
-    const sec = $("#collections");
-    let shown = false, cur = null, px = -1, py = -1, raf = 0;
-    const setCat = id => { if (id === cur) return; cur = id; $$("img", fl).forEach(i => i.classList.toggle("on", i.dataset.cat === id)); };
-    const show = () => { if (shown) return; shown = true; gsap.to(fl, { opacity: 1, scale: 1, rotate: -4, duration: 0.45, ease: "power3.out", overwrite: "auto" }); };
-    const hide = () => { if (!shown) return; shown = false; gsap.to(fl, { opacity: 0, scale: 0.85, rotate: 0, duration: 0.3, ease: "power2.out", overwrite: "auto" }); };
-    // one source of truth: whatever row is under the pointer right now (also after the page scrolls under it)
-    const update = () => { const el = px < 0 ? null : document.elementFromPoint(px, py); const row = el && el.closest(".coll-row"); if (row) { setCat(row.dataset.cat); show(); } else hide(); };
-    sec.addEventListener("mousemove", e => { px = e.clientX; py = e.clientY; xTo(px); yTo(py); update(); });
-    sec.addEventListener("mouseleave", () => { px = -1; hide(); });
-    window.addEventListener("scroll", () => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; update(); }); }, { passive: true });
+    const cover = { couture: "cel-pearl-sculpture", wedding: "wed-candlelight-rose", patisserie: "pat-millefeuille", viennoiserie: "pat-croissant", confection: "conf-macaron-stack", events: "evt-macaron-tower", gifting: "gift-petite-box" };
+    const score = { Bestseller: 3, Signature: 3, New: 2, "Book first": 0 };
+    const C = D.CATEGORIES.map(c => {
+      const ps = D.PRODUCTS.filter(p => p.cat === c.id);
+      const picks = ps.map((p, k) => ({ p, s: (p.badge ? score[p.badge] : 1) * 100 - k })).filter(x => x.p.img !== cover[c.id]).sort((a, b) => b.s - a.s).slice(0, 3).map(x => x.p);
+      return { c, n: ps.length, min: Math.min(...ps.map(p => p.price)), picks };
+    });
+    const two = n => String(n).padStart(2, "0");
+    const list = $("#cxList"), arch = $("#cxArch"), cardEl = $("#cxCard"), picksEl = $("#cxPicks"), cta = $("#cxCta");
+    $("#cxAll").textContent = `All ${D.PRODUCTS.length} creations →`;
+    list.innerHTML = C.map((x, i) => `<li><button class="cx-item" type="button" data-i="${i}" aria-pressed="false">
+      <span class="cx-no mono">${two(i + 1)}</span><span class="cx-name">${esc(x.c.name)}</span>
+      <span class="cx-meta mono">${x.n} pieces · from ${S.money(x.min)}</span><i class="cx-bar" aria-hidden="true"><b></b></i></button></li>`).join("");
+    // every photo is fetched up front, so a change never waits on the network; nothing ever leaves the arch
+    const srcs = C.map(x => img(cover[x.c.id], "full"));
+    srcs.forEach(u => { const im = new Image(); im.src = u; });
+    const items = $$(".cx-item", list);
+    let cur = -1, prog = null;
+
+    function fill(i) {
+      const x = C[i];
+      cardEl.innerHTML = `<span class="cx-card-no mono">${two(i + 1)} / ${two(C.length)}</span><p>${esc(x.c.line)}</p>`;
+      picksEl.innerHTML = x.picks.map(p => `<li><button class="cx-pick" type="button" data-qv="${p.id}">
+        <img src="${img(p.img)}" alt="" loading="lazy" decoding="async">
+        <span class="cx-pick-t"><b>${esc(p.name)}</b><em>${esc(p.unit || p.line)}</em></span>
+        <span class="cx-pick-p mono">${p.from ? "from " : ""}${S.money(p.price)}</span></button></li>`).join("");
+      cta.href = `menu.html#${x.c.id}`;
+      cta.querySelector("span").textContent = `Explore ${x.c.name.toLowerCase()} →`;
+      if (M) {
+        gsap.fromTo(cardEl.children, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.06, overwrite: true });
+        gsap.fromTo(picksEl.children, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.07, delay: 0.1, overwrite: true });
+      }
+    }
+    function show(i) {
+      if (i === cur) return;
+      const from = cur; cur = i;
+      items.forEach((b, k) => { b.classList.toggle("is-on", k === i); b.setAttribute("aria-pressed", k === i); });
+      // on phones the index is a row of pills: keep the active one in sight without moving the page
+      if (list.scrollWidth > list.clientWidth + 2) list.scrollTo({ left: Math.max(0, items[i].parentElement.offsetLeft - 16), behavior: M && from >= 0 ? "smooth" : "auto" });
+      fill(i);
+      // the slice: each new cake is cut in on top of what is showing; layers underneath are only
+      // removed once it fully covers them, so a quick change of mind can never flash or jump
+      const f = document.createElement("figure");
+      f.className = "cx-slide";
+      f.innerHTML = `<img src="${srcs[i]}" alt="${esc(C[i].c.name)}" decoding="async">`;
+      arch.appendChild(f);
+      const clearBelow = () => { let el = f.previousElementSibling; while (el) { const p = el.previousElementSibling; if (M) gsap.killTweensOf([el, el.firstElementChild]); el.remove(); el = p; } };
+      if (!M || from < 0) { clearBelow(); return; }
+      const dir = i > from ? 1 : -1;
+      gsap.fromTo(f, { clipPath: dir > 0 ? "polygon(100% 0%, 130% 0%, 100% 100%, 70% 100%)" : "polygon(-30% 0%, 0% 0%, -30% 100%, -60% 100%)" },
+        { clipPath: "polygon(-30% 0%, 130% 0%, 100% 100%, -60% 100%)", duration: 1.05, ease: "expo.inOut", onComplete: () => { clearBelow(); gsap.set(f, { clearProps: "clipPath" }); } });
+      gsap.fromTo(f.firstElementChild, { scale: 1.16 }, { scale: 1, duration: 1.5, ease: "expo.out" });
+    }
+
+    // turns slowly on its own while in view; a hover pauses it, a click hands control to the visitor
+    let inView = false, hovering = false, stopped = !M;
+    function arm() {
+      if (prog) prog.kill();
+      if (!M) return;
+      $$(".cx-bar b", list).forEach(b => gsap.set(b, { scaleX: 0 }));
+      if (stopped) return;
+      prog = gsap.fromTo(items[cur].querySelector(".cx-bar b"), { scaleX: 0 }, { scaleX: 1, duration: 5.5, ease: "none", paused: !inView || hovering, onComplete: () => { show((cur + 1) % C.length); arm(); } });
+    }
+    const sync = () => { if (prog) (inView && !hovering) ? prog.resume() : prog.pause(); };
+    const pick = (i, stop) => { if (stop) stopped = true; show(i); arm(); };
+    show(0); arm();
+
+    let intent = 0;
+    const canHover = matchMedia("(hover: hover)").matches;
+    items.forEach((b, i) => {
+      b.addEventListener("click", () => { clearTimeout(intent); pick(i, true); });
+      b.addEventListener("focus", () => { if (!canHover || b.matches(":focus-visible")) pick(i, true); });
+      if (canHover) {
+        b.addEventListener("mouseenter", () => { clearTimeout(intent); intent = setTimeout(() => pick(i), 120); });
+        b.addEventListener("mouseleave", () => clearTimeout(intent));
+      }
+    });
+    const cx = $("#cx");
+    cx.addEventListener("mouseenter", () => { hovering = true; sync(); });
+    cx.addEventListener("mouseleave", () => { hovering = false; sync(); });
+    if ("IntersectionObserver" in window) new IntersectionObserver(es => { inView = es[0].isIntersecting; sync(); }, { threshold: 0.35 }).observe(arch);
+    if (M) gsap.from(".cx-stage", { clipPath: "inset(100% 0% 0% 0% round 999px 999px 28px 28px)", duration: 1.4, ease: "expo.inOut", scrollTrigger: { trigger: "#cx", start: "top 75%" }, clearProps: "clipPath" });
   })();
 
   /* ---------------- signatures (horizontal) ---------------- */

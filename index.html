@@ -49,16 +49,26 @@
   </div>
 
 
-  <!-- collections index -->
-  <section class="section bg-cocoa grain collections" id="collections">
+  <!-- collections: index, arched showcase, most-ordered -->
+  <section class="section cx-section" id="collections">
     <div class="wrap">
-      <div class="sec-head on-dark">
+      <div class="sec-head">
         <div><p class="eyebrow">The menu</p><h2 class="h2" data-split>Seven ways|to say it with sugar</h2></div>
-        <a class="link-u" href="menu.html">All creations →</a>
+        <div class="cx-head-side"><p class="muted" id="cxIntro">From the morning croissant to a five-tier wedding cake, all made in our Cantonments kitchen.</p><a class="link-u" href="menu.html" id="cxAll">All creations →</a></div>
       </div>
-      <ol class="coll-list" id="collList"></ol>
+      <div class="cx" id="cx">
+        <ol class="cx-list" id="cxList" aria-label="Collections"></ol>
+        <div class="cx-stage">
+          <div class="cx-arch" id="cxArch"></div>
+          <div class="cx-card glass" id="cxCard" aria-live="polite"></div>
+        </div>
+        <div class="cx-picks">
+          <p class="cx-k mono">Most ordered</p>
+          <ul class="cx-pick-list" id="cxPicks"></ul>
+          <a class="btn cx-cta" id="cxCta" href="menu.html"><span>Explore the collection</span></a>
+        </div>
+      </div>
     </div>
-    <div class="coll-float" id="collFloat" aria-hidden="true"></div>
   </section>
 
   <!-- signature, horizontal -->
