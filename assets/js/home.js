@@ -6,11 +6,11 @@
 
   /* ---------------- hero ---------------- */
   const SLIDES = [
-    { id: "wed-cantonments", eb: "Weddings", t: "Five tiers,|one quiet gasp", l: "The Cantonments: combed ivory buttercream, garden roses and ivy, set up at your venue by two of our team.", chip: "wed-couple-garden" },
-    { id: "cel-lambeth-rose", eb: "Birthdays", t: "Piped by hand,|gilded by hand", l: "The Lambeth Rosé: blush meringue over-piping, gold-leaf cherries, and a sponge you choose.", chip: "life-night-cake" },
-    { id: "pat-eclair-strawberry", eb: "Pâtisserie", t: "At the counter|by ten past seven", l: "Éclairs, mille-feuille and croissants laminated overnight. Order before noon for same-day delivery.", chip: "int-eclair-display" },
-    { id: "cel-hexagon-garden", eb: "Couture", t: "A garden,|in buttercream", l: "Hexagon Garden: two tall tiers, every petal piped by Nana Ama. Five days' notice, worth every one.", chip: "proc-piping-border" },
-    { id: "evt-orchid-table", eb: "Dessert tables", t: "Tables that|hold the room", l: "The Orchid Table: twelve desserts on gold stands for a hundred guests, styled and cleared by us.", chip: "life-print-dress" }
+    { id: "pat-croissant", eb: "The bakery", t: "Out of the oven|at ten past seven", l: "Croissants laminated by hand overnight, on the counter every morning.", chip: "int-viennoiserie-wall" },
+    { id: "pat-eclair-strawberry", eb: "Pâtisserie", t: "Éclairs, tarts,|mille-feuille", l: "The pastry counter, filled fresh before you wake.", chip: "int-eclair-display" },
+    { id: "cel-lambeth-rose", eb: "Cakes", t: "Piped by hand,|gilded by hand", l: "Blush over-piping and gold-leaf cherries, in the sponge you choose.", chip: "life-night-cake" },
+    { id: "pat-chocolate-fig-tart", eb: "Tarts", t: "Worth crossing|Accra for", l: "Ghana cocoa, fresh figs and a crisp sablé crust.", chip: "gal-pain-macro" },
+    { id: "wed-cantonments", eb: "Weddings", t: "Five tiers,|one quiet gasp", l: "Combed buttercream and garden roses, set up at your venue.", chip: "wed-couple-garden" }
   ];
   const domeSlides = $("#domeSlides"), title = $("#heroTitle"), lede = $("#heroLede"), dots = $("#heroDots"), card = $("#domeCard");
   domeSlides.innerHTML = SLIDES.map((s, i) => `<figure class="dome-slide ${i ? "" : "is-on"}" data-i="${i}"><img src="${img(S.byId[s.id].img, "full")}" alt="${esc(S.byId[s.id].name)}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></figure>`).join("");
@@ -95,12 +95,11 @@
     const up = S.upcomingOccasions(7).length;
     const items = [
       "Croissants out of the oven at 7:10",
-      `${due} cakes leaving the kitchen today`,
-      `${sat.left} couture slots left for ${sat.day}`,
       "Pistachio mille-feuille back on the counter",
-      `${up} birthdays we're baking for this week`,
-      "Order before noon for same-day pâtisserie delivery",
-      "Wedding tastings Tuesday to Saturday"
+      "Same-day pâtisserie, order before noon",
+      `${due} cakes leaving the kitchen today`,
+      `${sat.left} cake slots left for ${sat.day}`,
+      `${up} birthdays we're baking for this week`
     ];
     const row = items.map(t => `<span>${esc(t)}</span><i aria-hidden="true"></i>`).join("");
     $("#ticker").innerHTML = row + row;
@@ -108,7 +107,7 @@
 
   /* ---------------- collections: index, arched showcase, most ordered ---------------- */
   (function () {
-    const cover = { couture: "cel-pearl-sculpture", wedding: "wed-candlelight-rose", patisserie: "pat-millefeuille", viennoiserie: "pat-croissant", confection: "conf-macaron-stack", events: "evt-macaron-tower", gifting: "gift-petite-box" };
+    const cover = { couture: "cel-pearl-sculpture", wedding: "wed-candlelight-rose", patisserie: "pat-millefeuille", viennoiserie: "gal-croissants", confection: "conf-macaron-stack", events: "evt-macaron-tower", gifting: "gift-petite-box" };
     const score = { Bestseller: 3, Signature: 3, New: 2, "Book first": 0 };
     const C = D.CATEGORIES.map(c => {
       const ps = D.PRODUCTS.filter(p => p.cat === c.id);
@@ -194,7 +193,7 @@
 
   /* ---------------- signatures (horizontal) ---------------- */
   (function () {
-    const ids = ["cel-lambeth-rose", "cel-hexagon-garden", "cel-pearl-sculpture", "pat-chocolate-fig-tart", "wed-cantonments", "conf-truffles", "kid-princess-castle", "gift-pistachio-ribbon", "evt-orchid-table"];
+    const ids = ["pat-pistachio-millefeuille", "pat-croissant", "pat-chocolate-fig-tart", "pat-eclair-cocoa", "cel-lambeth-rose", "pat-babka-knot", "conf-truffles", "cel-hexagon-garden", "wed-cantonments"];
     const track = $("#sigTrack");
     track.innerHTML = ids.map(id => U.card(S.byId[id], { reveal: false, eager: true })).join("") + `<a class="sig-end" href="menu.html"><span class="h3">See all ${D.PRODUCTS.length}<br>creations</span><span class="sig-end-arr">→</span></a>`;
     track.classList.add("is-swipe");

@@ -8,7 +8,7 @@ window.CCH = (function () {
   const BUSINESS = {
     name: "Cindy's Cake House",
     short: "Cindy's",
-    tagline: "Couture cakes & pâtisserie",
+    tagline: "Pâtisserie, bakery & cakes",
     city: "Accra",
     address: "12 Nii Sai Road, Cantonments, Accra",
     gps: "GA-090-1462",
@@ -49,13 +49,13 @@ window.CCH = (function () {
   const SETUP_FEE = 450; // white-glove wedding / tiered set-up within Accra
 
   const CATEGORIES = [
-    { id: "couture", name: "Couture cakes", line: "Celebration cakes, baked to order in 48 hours to five days" },
-    { id: "wedding", name: "Wedding & engagement", line: "Tiered cakes, knocking-ceremony cakes and private tastings" },
-    { id: "patisserie", name: "Pâtisserie", line: "Tarts, éclairs, entremets and slices from the counter, daily" },
-    { id: "viennoiserie", name: "Viennoiserie", line: "Laminated by hand overnight, out of the oven at 7:10" },
-    { id: "confection", name: "Macarons & chocolates", line: "Made with single-origin Ghanaian cocoa from Ashanti" },
-    { id: "events", name: "Dessert tables", line: "Styled tables, towers and high tea for 20 to 400 guests" },
-    { id: "gifting", name: "Gifting & corporate", line: "Ribboned boxes, hatbox cakes and branded orders" }
+    { id: "patisserie", name: "Pâtisserie", line: "Éclairs, tarts and entremets, made every morning" },
+    { id: "viennoiserie", name: "Bakery & viennoiserie", line: "Croissants, danishes, loaves and cookies from 7:10" },
+    { id: "couture", name: "Celebration cakes", line: "Couture cakes, baked to order in 48 hours" },
+    { id: "wedding", name: "Weddings", line: "Tiered cakes, knocking cakes and tastings" },
+    { id: "confection", name: "Macarons & chocolates", line: "Single-origin Ghanaian cocoa from Ashanti" },
+    { id: "events", name: "Dessert tables", line: "Styled tables for 20 to 400 guests" },
+    { id: "gifting", name: "Gifting & corporate", line: "Ribboned boxes and branded orders" }
   ];
 
   const OCCASIONS = [
@@ -201,12 +201,12 @@ window.CCH = (function () {
   p("pat-carrot-slice", "Carrot Cake Slice", "patisserie", ["everyday"], "Spiced carrot, walnut, cream cheese", 90, { unit: "slice" });
   p("pat-shortcake", "Strawberry Shortcake", "patisserie", ["everyday"], "Japanese-style chiffon, whipped cream, strawberries", 95, { unit: "slice" });
   p("pat-trifle", "Tropical Trifle Cup", "patisserie", ["everyday"], "Mango, passion fruit, sponge and vanilla cream", 85, { unit: "cup" });
-  p("pat-lemon-loaf", "Lemon Drizzle Loaf", "patisserie", ["everyday", "corporate"], "Lemon & ginger loaf, crackling glaze, candied peel", 320, { unit: "whole loaf" });
-  p("pat-red-velvet-cupcake", "Red Velvet Cupcakes", "patisserie", ["everyday", "birthday", "kids"], "Cream cheese swirl, velvet crumb", 270, { unit: "box of 6" });
-  p("pat-hazelnut-cupcake", "Hazelnut Praline Cupcakes", "patisserie", ["everyday", "birthday"], "Chocolate cupcake, praline buttercream, hazelnut truffle", 300, { unit: "box of 6" });
-  p("pat-madeleines", "Glazed Madeleines", "patisserie", ["everyday", "corporate"], "Brown-butter madeleines dipped in mango, hibiscus and pistachio glaze", 210, { unit: "box of 9" });
-  p("pat-brownies", "Ghana Cocoa Brownies", "patisserie", ["everyday", "corporate"], "Fudgy 70% cocoa brownies with sea salt", 240, { unit: "box of 6" });
-  p("pat-cookies", "Brown-Butter Cookies", "patisserie", ["everyday", "kids"], "Chunky chocolate cookies, crisp edge, soft middle", 220, { unit: "box of 8" });
+  p("pat-lemon-loaf", "Lemon Drizzle Loaf", "viennoiserie", ["everyday", "corporate"], "Lemon & ginger loaf, crackling glaze, candied peel", 320, { unit: "whole loaf" });
+  p("pat-red-velvet-cupcake", "Red Velvet Cupcakes", "viennoiserie", ["everyday", "birthday", "kids"], "Cream cheese swirl, velvet crumb", 270, { unit: "box of 6" });
+  p("pat-hazelnut-cupcake", "Hazelnut Praline Cupcakes", "viennoiserie", ["everyday", "birthday"], "Chocolate cupcake, praline buttercream, hazelnut truffle", 300, { unit: "box of 6" });
+  p("pat-madeleines", "Glazed Madeleines", "viennoiserie", ["everyday", "corporate"], "Brown-butter madeleines dipped in mango, hibiscus and pistachio glaze", 210, { unit: "box of 9" });
+  p("pat-brownies", "Ghana Cocoa Brownies", "viennoiserie", ["everyday", "corporate"], "Fudgy 70% cocoa brownies with sea salt", 240, { unit: "box of 6" });
+  p("pat-cookies", "Brown-Butter Cookies", "viennoiserie", ["everyday", "kids"], "Chunky chocolate cookies, crisp edge, soft middle", 220, { unit: "box of 8" });
 
   /* ---------------- Viennoiserie ---------------- */
   p("pat-croissant", "Butter Croissant", "viennoiserie", ["everyday"], "Three days of lamination with cultured butter", 55, { unit: "each", badge: "Bestseller" });

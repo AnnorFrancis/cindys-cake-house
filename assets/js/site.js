@@ -76,7 +76,7 @@ window.CCHUI = (function () {
         <div class="foot-top">
           <div>
             <a class="brand" href="${root}index.html">${logo()}<span class="brand-word"><b>Cindy's</b><small>Cake House</small></span></a>
-            <p class="muted" style="margin-top:18px;max-width:34ch">Couture cakes, wedding tiers and daily pâtisserie, baked in Cantonments since ${B.founded}.</p>
+            <p class="muted" style="margin-top:18px;max-width:34ch">Pâtisserie, bakery and couture cakes, made in Cantonments since ${B.founded}.</p>
             <form class="remind" id="remindForm" novalidate>
               <label class="sr-only" for="remindPhone">WhatsApp number for occasion reminders</label>
               <input class="input" id="remindPhone" type="tel" placeholder="WhatsApp number" autocomplete="tel">
